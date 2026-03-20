@@ -37,7 +37,7 @@ Use this checklist before finalising the report. Every item must pass.
 - [ ] At least 1 figure included (lifecycle diagram or rights-and-controls diagram)
 - [ ] Figures are referenced in-text, not just appended
 - [ ] Implementation note appears in Section 3 with CA, explorer link, GitHub link
-- [ ] Screenshots referenced as Figures A1–A8 in appendix or implementation note
+- [ ] Screenshots referenced as Figures A1–A13 in appendix or implementation note
 - [ ] All CA values match across report, README, and deployment JSON
 
 ## Tone and Framing

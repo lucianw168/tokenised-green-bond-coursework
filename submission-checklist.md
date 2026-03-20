@@ -26,7 +26,7 @@ Use this checklist before final submission. Every item must be checked.
 - [ ] At least 1 figure (lifecycle diagram or rights-and-controls diagram)
 - [ ] At least 3 substantive references cited
 - [ ] Reference format is consistent throughout
-- [ ] Screenshots referenced as Figures A1–A8
+- [ ] Screenshots referenced as Figures A1–A13
 
 ### Quality Gates
 
@@ -81,8 +81,8 @@ Use this checklist before final submission. Every item must be checked.
 
 ## D. Screenshots and Evidence
 
-- [ ] All 8 screenshots exist in `screenshots/`
-- [ ] Screenshots follow the narrative order (01–08)
+- [ ] All 13 screenshots exist in `screenshots/`
+- [ ] Screenshots follow the narrative order (01–13)
 - [ ] At least one screenshot shows the contract address
 - [ ] At least one screenshot shows a failed/reverted transaction
 - [ ] At least one screenshot shows a successful state change

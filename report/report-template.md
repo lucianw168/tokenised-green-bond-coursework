@@ -1,12 +1,12 @@
 # Tokenising Green Bonds in Hong Kong: A Permissioned ERC-20 Prototype for Compliant Institutional Issuance
 
-> Word count: ~2,380 (excluding references and appendix)
+> Word count: ~2,200 (body text only; excludes references, appendix, implementation note blockquote, and figure captions)
 
 ---
 
 ## Introduction
 
-Green bonds represent one of the fastest-growing segments of the fixed-income market, yet their issuance, distribution, and servicing remain operationally fragmented across manual processes. This report examines whether tokenisation — representing bond claims as programmable on-chain tokens — can meaningfully improve the lifecycle efficiency of a HKD-denominated green bond targeting professional investors in Hong Kong. The analysis centres on a permissioned fungible token design that embeds eligibility controls, transfer restrictions, and lifecycle logic directly into the token's smart contract. A proof-of-concept prototype, GreenBondToken, was developed and deployed on an Ethereum testnet to validate these design choices. The central argument is that tokenisation offers genuine operational benefits for institutional green bond issuance, but its success depends on legal recognition, market infrastructure, and regulatory clarity — not technology alone.
+Green bonds are among the fastest-growing fixed-income instruments, yet their issuance, distribution, and servicing remain fragmented across manual processes. This report examines whether tokenisation can improve the lifecycle efficiency of a HKD-denominated green bond targeting professional investors in Hong Kong. The analysis centres on a permissioned fungible token that embeds eligibility controls, transfer restrictions, and lifecycle logic into a smart contract. A proof-of-concept prototype, GreenBondToken, was deployed on an Ethereum testnet to validate these choices. The central argument is that tokenisation offers genuine operational benefits for institutional green bond issuance, but its success depends on legal recognition, market infrastructure, and regulatory clarity — not technology alone.
 
 ---
 
@@ -20,7 +20,7 @@ The token designed in this report represents a proportional claim on the bond's 
 
 The choice of a fungible token (ERC-20) follows directly from the asset's economic properties. Green bonds are standardised debt instruments with uniform terms — every unit of a given issuance carries identical rights to coupon and principal. Unlike real estate or collectibles, where each unit may have unique attributes requiring non-fungible representation, bond units are inherently interchangeable. A fungible token is therefore the natural digital representation: it enables fractional holdings, straightforward balance tracking, and programmatic transfer among approved participants.
 
-The bondholder rights embedded in the token include: (1) entitlement to coupon payments, administered off-chain by the issuer or a servicing agent; (2) principal repayment at maturity; and (3) access to green disclosure and impact reporting, which the issuer is obligated to provide under the applicable green bond framework. These rights exist by virtue of the bond's legal documentation, with the token serving as the on-chain record of ownership that facilitates their exercise.
+The bondholder rights embedded in the token include entitlement to coupon payments (administered off-chain by the issuer or servicing agent), principal repayment at maturity, and access to green disclosure reporting. These rights exist by virtue of the bond's legal documentation; the token serves as the on-chain record of ownership that facilitates their exercise.
 
 ---
 
@@ -32,9 +32,9 @@ First, investor onboarding can be streamlined. In traditional bond markets, elig
 
 Second, transfer administration is simplified. Conventional bond transfers involve custodian messaging, reconciliation, and multi-day settlement. A tokenised bond can settle peer-to-peer between two whitelisted addresses in a single transaction, eliminating the need for centralised clearing and reducing administrative overhead. This is especially relevant for private placements and bilateral OTC trades, where existing processes are manual and slow.
 
-Third, servicing transparency improves. Although coupon distribution is not implemented on-chain in this prototype, the programmable infrastructure of a tokenised bond makes it feasible to automate payment calculations based on on-chain balances. More immediately, the immutable transaction history provides an auditable record of who held which tokens when — supporting regulatory reporting and green bond disclosure requirements.
+Third, servicing transparency improves. Although coupon distribution is not implemented on-chain in this prototype, the immutable transaction history provides an auditable record of holdings over time — supporting regulatory reporting and green bond disclosure requirements.
 
-Fourth, access enforcement becomes programmatic rather than procedural. The whitelist mechanism ensures compliance with investor eligibility rules at the infrastructure level. If a holder's accreditation lapses, the issuer can remove them from the whitelist, and subsequent transfers to that address will revert automatically. This is a meaningful improvement over post-trade compliance checks that rely on manual reconciliation.
+Fourth, access enforcement becomes programmatic. The whitelist mechanism enforces investor eligibility at the infrastructure level. If a holder's accreditation lapses, the issuer removes them from the whitelist; subsequent transfers to that address revert automatically — a meaningful improvement over post-trade manual reconciliation.
 
 However, it is essential to state clearly: tokenisation does not automatically create liquidity. A permissioned bond token traded among a limited pool of qualified investors will face the same demand-side constraints as its conventional equivalent. The operational benefits described above are real, but they should not be conflated with market depth or price discovery.
 
@@ -52,7 +52,9 @@ The token embeds two categories of on-chain logic: rights and controls.
 
 These controls are enforced through an override of the ERC-20 `_update()` function, which intercepts every token movement and applies the appropriate checks before execution. This design ensures that compliance rules cannot be bypassed by direct low-level calls.
 
-**Lifecycle.** The bond token follows a defined lifecycle: the issuer deploys the contract, qualifies investors via whitelist, mints tokens as primary allocation, enables restricted secondary transfer among approved holders, and ultimately facilitates redemption through burning. The pause mechanism provides a circuit breaker at any stage (see Figure 1).
+**Lifecycle.** The bond token follows a defined lifecycle: the issuer deploys the contract, qualifies investors via whitelist, mints tokens as primary allocation, enables restricted secondary transfer among approved holders, and facilitates redemption through burning. The pause mechanism provides a circuit breaker at any stage (see Figure 1).
+
+![Figure 1: Bond Token Lifecycle](figures/figure-1-lifecycle.png)
 
 ### Implementation Note
 
@@ -72,17 +74,13 @@ The market access model for this tokenised green bond follows the lifecycle of a
 
 **Onboarding.** Before participating, investors must complete KYC/AML verification and demonstrate qualification as professional or qualified investors under Hong Kong's Securities and Futures Ordinance (SFC, 2023). Upon successful clearance, the issuer adds the investor's wallet address to the contract's whitelist — a prerequisite for receiving tokens at any stage.
 
-**Subscription and payment.** Qualified investors subscribe to the bond during the primary offering period. Payment is made in fiat currency (HKD) through conventional banking channels, or potentially via tokenised cash if such infrastructure becomes available. The subscription amount determines the investor's token allocation.
-
-**Primary issuance.** The issuer mints tokens to each subscriber's whitelisted address in proportion to their investment. This on-chain primary issuance creates an immutable record of the initial allocation, replacing the manual book-entry process used in conventional bond distribution.
+**Subscription and primary issuance.** Qualified investors subscribe during the offering period, paying in fiat (HKD) through conventional banking channels. The issuer then mints tokens to each subscriber's whitelisted address in proportion to their investment. This on-chain primary issuance creates an immutable record of allocation, replacing the manual book-entry process.
 
 **Servicing.** Coupon payments are administered off-chain by the issuer or a designated servicing agent. On-chain token balances serve as the authoritative record of entitlement, providing a single, auditable source for calculating each holder's coupon share. Green disclosure obligations are fulfilled through conventional channels, with the on-chain record providing supplementary transparency.
 
 **Secondary transfer.** Token holders may transfer their holdings to other whitelisted addresses. This enables bilateral OTC transactions between qualified investors without requiring a centralised exchange or clearinghouse. However, this permissioned venue is constrained by design: only pre-approved participants can transact, and the pool of eligible counterparties is limited.
 
-This constraint has direct implications for liquidity. The token's pricing drivers in secondary trading depend on the bond's credit quality, prevailing interest rates, and green premium — the same factors that drive conventional bond pricing. However, liquidity fragmentation is an inherent feature of a permissioned venue: the number of potential buyers is small, price discovery is limited, and there is no continuous order book. Tokenisation improves the *mechanics* of transfer (faster settlement, reduced intermediation) but does not expand the *demand side* of the market.
-
-The appropriate framing is therefore one of operational efficiency within an institutional context, not retail accessibility.
+This has direct implications for liquidity. Pricing drivers depend on the bond's credit quality, prevailing interest rates, and green premium. However, liquidity fragmentation is inherent in a permissioned venue: potential buyers are few, price discovery is limited, and there is no continuous order book. Tokenisation improves the *mechanics* of transfer but does not expand the *demand side* of the market. The appropriate framing is operational efficiency, not retail accessibility.
 
 ---
 
