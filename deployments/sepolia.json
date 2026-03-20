@@ -15,5 +15,5 @@
   "explorerAddressUrl": "https://sepolia.etherscan.io/address/0x1b48384Cb42a292975F4D4cD78D7EDa2A6F34F1E",
   "explorerTxUrl": "https://sepolia.etherscan.io/tx/0x13612c546f73e3bb8382e95c3e8bcd3c64320c231a9ff65ef84ce540412f8b5f",
   "sourceVerified": true,
-  "gitCommit": "pending — will be set after first git push"
+  "gitCommit": "3778f76"
 }
