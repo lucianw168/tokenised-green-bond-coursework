@@ -1,0 +1,30 @@
+{
+  "name": "tokenised-green-bond-coursework",
+  "version": "1.0.0",
+  "description": "Simplified proof-of-concept for a compliant tokenised green bond prototype (UCL coursework)",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "deploy:localhost": "hardhat run scripts/deploy.js --network localhost",
+    "demo:sepolia": "hardhat run scripts/demo.js --network sepolia",
+    "demo:localhost": "hardhat run scripts/demo.js --network localhost",
+    "fill-docs:sepolia": "node scripts/fill-deployment-info.js sepolia",
+    "fill-docs:holesky": "node scripts/fill-deployment-info.js holesky"
+  },
+  "keywords": [
+    "tokenisation",
+    "green-bond",
+    "ERC20",
+    "permissioned",
+    "Hong-Kong",
+    "coursework"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@openzeppelin/contracts": "^5.0.0",
+    "dotenv": "^16.4.0",
+    "hardhat": "^2.22.0"
+  }
+}

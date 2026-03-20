@@ -1,0 +1,8 @@
+{
+  "network": "sepolia",
+  "contractAddress": "0x1b48384Cb42a292975F4D4cD78D7EDa2A6F34F1E",
+  "issuer": "0xED512f3a7C8F3A21E6684f9bE7b52e811332E10d",
+  "investorA": "0x53D3A6979b3612070328F211c710DbdED0Eab0C6",
+  "investorB": "0x58Da28dd169d1469b6d7187aFF5020898EC0B2e4",
+  "unapproved": "0xa9Ce6569bd661BAa5D1F16eA26B3126e49AfF764"
+}

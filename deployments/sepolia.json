@@ -1,0 +1,19 @@
+{
+  "network": "sepolia",
+  "chainId": 11155111,
+  "contractName": "GreenBondToken",
+  "contractAddress": "0x1b48384Cb42a292975F4D4cD78D7EDa2A6F34F1E",
+  "deploymentTxHash": "0x13612c546f73e3bb8382e95c3e8bcd3c64320c231a9ff65ef84ce540412f8b5f",
+  "blockNumber": 10485189,
+  "deployedAtUtc": "2026-03-20T17:14:25.177Z",
+  "deployerAddress": "0xED512f3a7C8F3A21E6684f9bE7b52e811332E10d",
+  "ownerAddress": "0xED512f3a7C8F3A21E6684f9bE7b52e811332E10d",
+  "tokenName": "HK Green Bond Token",
+  "tokenSymbol": "HKGBT",
+  "decimals": 18,
+  "maturityTimestamp": 1805562851,
+  "explorerAddressUrl": "https://sepolia.etherscan.io/address/0x1b48384Cb42a292975F4D4cD78D7EDa2A6F34F1E",
+  "explorerTxUrl": "https://sepolia.etherscan.io/tx/0x13612c546f73e3bb8382e95c3e8bcd3c64320c231a9ff65ef84ce540412f8b5f",
+  "sourceVerified": true,
+  "gitCommit": "pending — will be set after first git push"
+}
